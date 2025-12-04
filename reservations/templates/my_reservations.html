@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} My Reservations {% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+    <h1 class="page-title">My Reservations</h1>
+
+    {% if reservations %}
+        <div class="reservations-grid">
+            {% for r in reservations %}
+            <div class="reservation-card">
+
+                <div class="card-header">
+                    <span class="branch-name">{{ r.branch.name }}</span>
+                    <span class="status {{ r.status }}">
+                        {{ r.status|title }}
+                    </span>
+                </div>
+
+                <div class="card-body">
+                    <p><strong>Date:</strong> {{ r.date }}</p>
+                    <p><strong>Time:</strong> {{ r.time }}</p>
+                    <p><strong>Party Size:</strong> {{ r.party_size }}</p>
+
+                    {% if r.table %}
+                        <p><strong>Table:</strong> {{ r.table.name }}</p>
+                    {% else %}
+                        <p><strong>Table:</strong> Waiting for assignment</p>
+                    {% endif %}
+
+                    {% if r.notes %}
+                        <p><strong>Notes:</strong> {{ r.notes }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer">
+                <a href="{% url 'reservation_cancel' r.id %}" class="btn btn-danger btn-sm">
+
+    Cancel
+</a>
+
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <p class="empty-text">You currently have no reservations.</p>
+    {% endif %}
+</div>
+
+<style>
+/* Page */
+.page-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.page-title {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Grid */
+.reservations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Card */
+.reservation-card {
+    background: #1c1c1c;
+    border: 1px solid #2f2f2f;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    transition: 0.2s ease;
+}
+
+.reservation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px rgba(255,255,255,0.08);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.branch-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Status tags */
+.status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.status.confirmed {
+    background: #0f5132;
+    color: #d1ffe2;
+}
+
+.status.pending {
+    background: #664d03;
+    color: #fff3cd;
+}
+
+.status.cancelled {
+    background: #58151c;
+    color: #f8d7da;
+}
+
+.card-body p {
+    margin: 6px 0;
+}
+
+/* Footer */
+.card-footer {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.cancel-btn {
+    color: #ffb3b3;
+    background: #3b0000;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #660000;
+    transition: 0.25s;
+}
+
+.cancel-btn:hover {
+    background: #660000;
+    color: white;
+}
+
+/* Empty text */
+.empty-text {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 40px;
+    opacity: 0.7;
+}
+</style>
+
+{% endblock %}

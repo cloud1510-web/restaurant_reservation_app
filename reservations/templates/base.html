@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RRM System{% endblock %}</title>
+
+    <!-- Tailwind (optional) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { background-color: #0d0d0d; color: #e6e6e6; }
+        .lux-card { background: #161616; border: 1px solid #222; border-radius: 12px; padding: 20px; }
+        .gold { color: #c5a052; }
+        .btn-gold { background-color: #c5a052; color: #0d0d0d; padding: 10px 18px; border-radius: 8px; }
+        .nav-link { padding: 10px 14px; border-radius: 6px; }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <nav class="flex justify-between items-center px-8 py-5 border-b border-[#1f1f1f] bg-[#111]">
+        <div class="text-2xl font-bold gold">RRM System</div>
+
+        <div class="flex gap-6 items-center">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'my_reservations' %}" class="nav-link">My Reservations</a>
+
+                {% if user.profile.role == 'staff' or user.profile.role == 'manager' %}
+                    <a href="{% url 'staff_dashboard' %}" class="nav-link">Staff Dashboard</a>
+                    <a href="{% url 'menu_staff' %}" class="nav-link">Menu (staff)</a>
+                    <a href="{% url 'tables_staff' %}" class="nav-link">Tables (staff)</a>
+                    <a href="{% url 'branches_staff' %}" class="nav-link">Branches (staff)</a>
+                {% endif %}
+
+                {% if user.profile.role == 'manager' %}
+                    <a href="{% url 'manager_analytics' %}" class="nav-link">Analytics</a>
+                {% endif %}
+
+                <a href="{% url 'logout' %}" class="btn-gold">Logout</a>
+
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-gold">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container mx-auto px-6 py-10">
+        <div class="lux-card">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto py-6 text-center text-gray-500 text-sm">
+      
+    </footer>
+</body>
+</html>

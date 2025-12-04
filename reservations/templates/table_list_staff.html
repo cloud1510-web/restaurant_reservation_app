@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Tables</h1>
+
+    <a href="{% url 'table_create' %}" class="btn btn-primary">+ Add Table</a>
+    <br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Branch</th>
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for t in tables %}
+            <tr>
+                <td>{{ t.branch.name }}</td>
+                <td>{{ t.name }}</td>
+                <td>{{ t.capacity }}</td>
+                <td>{{ t.status }}</td>
+                <td>
+                    <a href="{% url 'table_update' t.id %}" class="btn btn-secondary">Edit</a>
+                    <a href="{% url 'table_delete' t.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
+

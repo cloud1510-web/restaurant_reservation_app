@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Branch Form {% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold gold mb-6">Branch Form</h1>
+
+<form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="btn-gold">Save</button>
+</form>
+
+{% endblock %}

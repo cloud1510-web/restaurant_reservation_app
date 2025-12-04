@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Available Branches</h2>
+
+<ul class="list-group">
+    {% for b in branches %}
+    <li class="list-group-item">{{ b.name }} — {{ b.address }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

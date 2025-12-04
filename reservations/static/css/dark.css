@@ -1,0 +1,103 @@
+/* --------- DARK LUXURY THEME --------- */
+body {
+    background: #0d0d0d;
+    color: #f2f2f2;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+}
+
+/* Center container */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.05);
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: #4e5ae8;
+}
+.btn-primary:hover {
+    background: #3b47c5;
+}
+
+.btn-danger {
+    background: #d9534f;
+}
+.btn-danger:hover {
+    background: #c64541;
+}
+
+.btn-secondary {
+    background: #444;
+}
+.btn-secondary:hover {
+    background: #555;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background: #222;
+    padding: 12px;
+    text-align: left;
+    color: #eee;
+    font-weight: 500;
+}
+
+table td {
+    padding: 12px;
+    border-top: 1px solid #333;
+}
+
+/* Forms */
+form input, form select, form textarea {
+    width: 100%;
+    background: #111;
+    border: 1px solid #333;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+/* Links */
+a {
+    color: #6c8cff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

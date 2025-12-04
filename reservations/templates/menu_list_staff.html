@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Menu Items {% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold gold mb-6">Menu Items</h1>
+
+<div class="mb-5">
+    <a href="{% url 'menu_create' %}" class="btn-gold">➕ Add New Item</a>
+</div>
+
+<table class="w-full text-left border border-[#333] rounded-lg overflow-hidden">
+    <thead class="bg-[#1f1f1f]">
+        <tr>
+            <th class="p-3">Name</th>
+            <th class="p-3">Branch</th>
+            <th class="p-3">Price</th>
+            <th class="p-3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in menu_items %}
+        <tr class="border-b border-[#2a2a2a]">
+            <td class="p-3">{{ item.name }}</td>
+            <td class="p-3">{{ item.branch.name }}</td>
+            <td class="p-3">${{ item.price }}</td>
+            <td class="p-3">
+                <a href="{% url 'menu_update' item.id %}" class="text-blue-400 hover:underline">Edit</a> |
+                <a href="{% url 'menu_delete' item.id %}" class="text-red-400 hover:underline">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="p-4 text-center opacity-70">No menu items available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

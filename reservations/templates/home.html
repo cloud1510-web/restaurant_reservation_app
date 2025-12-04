@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div class="home-container">
+
+    <h1 class="home-title">Welcome to Restaurant Reservation Manager</h1>
+    <p class="home-subtitle">Choose a branch or make a reservation</p>
+
+    <div class="button-row">
+        <a href="{% url 'branches' %}" class="btn-home dark">View Branches</a>
+        <a href="{% url 'reservation_create' %}" class="btn btn-gold">Make Reservation</a>
+
+
+
+
+    </div>
+
+</div>
+
+<style>
+
+/* Main container */
+.home-container {
+    max-width: 900px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 40px;
+    background: #111;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.04);
+}
+
+/* Title */
+.home-title {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Subtitle */
+.home-subtitle {
+    font-size: 18px;
+    margin-bottom: 35px;
+    color: #cccccc;
+}
+
+/* Button row */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Buttons */
+.btn-home {
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn-home.dark {
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+}
+
+.btn-home.dark:hover {
+    background: #333;
+    border-color: #666;
+}
+
+.btn-home.gold {
+    background: #d4a049;
+    color: black;
+    border: 1px solid #b78933;
+}
+
+.btn-home.gold:hover {
+    background: #f0b955;
+}
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} Menu Form {% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold gold mb-6">
+    {{ form.instance.pk|yesno:"Edit Menu Item,Add New Menu Item" }}
+</h1>
+
+<form method="post" class="space-y-5">
+    {% csrf_token %}
+
+    <div>
+        <label class="block mb-2 gold">Name</label>
+        {{ form.name }}
+    </div>
+
+    <div>
+        <label class="block mb-2 gold">Price</label>
+        {{ form.price }}
+    </div>
+
+    <div>
+        <label class="block mb-2 gold">Branch</label>
+        {{ form.branch }}
+    </div>
+
+    <button class="btn-gold w-full mt-4">Save</button>
+</form>
+{% endblock %}

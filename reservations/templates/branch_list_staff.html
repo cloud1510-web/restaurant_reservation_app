@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} Branches (Staff) {% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold gold mb-6">Branches</h1>
+
+<a href="{% url 'branch_create' %}" class="btn-gold mb-6 inline-block">+ Add Branch</a>
+
+<table class="w-full text-left border border-gray-700">
+    <thead class="bg-[#1a1a1a]">
+        <tr>
+            <th class="p-3">Name</th>
+            <th class="p-3">Location</th>
+            <th class="p-3">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for b in object_list %}
+        <tr class="border-b border-gray-700">
+            <td class="p-3">{{ b.name }}</td>
+            <td class="p-3">{{ b.location }}</td>
+            <td class="p-3">
+                <a href="{% url 'branch_update' b.pk %}" class="nav-link">Edit</a>
+                <a href="{% url 'branch_delete' b.pk %}" class="nav-link text-red-400">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

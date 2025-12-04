@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen bg-[#0d0d0d] text-gray-200 py-10 px-6">
+
+    <h1 class="text-4xl font-bold text-center mb-10 text-[#D4AF37] tracking-wide">
+        Staff Dashboard
+    </h1>
+
+    <!-- Filter Bar -->
+    <div class="max-w-4xl mx-auto mb-10 bg-[#161616] p-6 rounded-xl shadow-lg border border-[#333]">
+        <form method="get" class="flex flex-col md:flex-row gap-4 items-center justify-between">
+
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">Branch</label>
+                <select name="branch"
+                        class="bg-[#0d0d0d] border border-[#333] text-gray-200 px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#D4AF37]">
+                    <option value="">All Branches</option>
+                    {% for b in branches %}
+                        <option value="{{ b.id }}" {% if request.GET.branch == b.id|stringformat:'s' %}selected{% endif %}>
+                            {{ b.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">Date</label>
+                <input type="date"
+                       name="date"
+                       value="{{ request.GET.date }}"
+                       class="bg-[#0d0d0d] border border-[#333] text-gray-200 px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#D4AF37]">
+            </div>
+
+            <button class="bg-[#D4AF37] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#b9972f] transition">
+                Apply Filters
+            </button>
+        </form>
+    </div>
+
+    <!-- Reservation List -->
+    <div class="max-w-5xl mx-auto bg-[#161616] p-6 rounded-xl shadow-xl border border-[#333]">
+        <h2 class="text-2xl font-semibold mb-6 text-[#D4AF37]">Reservations</h2>
+
+        {% if reservations %}
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-[#0d0d0d] text-gray-300 text-sm uppercase tracking-wider">
+                        <tr>
+                            <th class="p-3 border-b border-[#333]">Customer</th>
+                            <th class="p-3 border-b border-[#333]">Branch</th>
+                            <th class="p-3 border-b border-[#333]">Date</th>
+                            <th class="p-3 border-b border-[#333]">Time</th>
+                            <th class="p-3 border-b border-[#333]">Table</th>
+                            <th class="p-3 border-b border-[#333]">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for r in reservations %}
+                            <tr class="hover:bg-[#0f0f0f] transition">
+                                <td class="p-3 border-b border-[#222]">{{ r.customer.user.username }}</td>
+                                <td class="p-3 border-b border-[#222]">{{ r.branch.name }}</td>
+                                <td class="p-3 border-b border-[#222]">{{ r.date }}</td>
+                                <td class="p-3 border-b border-[#222]">{{ r.time }}</td>
+                                <td class="p-3 border-b border-[#222]">
+                                    {% if r.table %}
+                                        {{ r.table.name }}
+                                    {% else %}
+                                        <span class="text-gray-500 italic">Unassigned</span>
+                                    {% endif %}
+                                </td>
+                                <td class="p-3 border-b border-[#222]">
+                                    {% if r.status == 'confirmed' %}
+                                        <span class="text-green-400 font-medium">Confirmed</span>
+                                    {% elif r.status == 'pending' %}
+                                        <span class="text-yellow-400 font-medium">Pending</span>
+                                    {% elif r.status == 'cancelled' %}
+                                        <span class="text-red-400 font-medium">Cancelled</span>
+                                    {% else %}
+                                        <span class="text-gray-400">{{ r.status }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        {% else %}
+            <p class="text-center text-gray-400 py-10 text-lg italic">
+                No reservations found.
+            </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

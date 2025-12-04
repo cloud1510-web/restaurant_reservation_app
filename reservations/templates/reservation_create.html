@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="lux-container">
+
+    <h1 class="lux-title">Make a Reservation</h1>
+
+    <form method="post" class="lux-form" action="{% url 'reservation_create' %}">
+
+        {% csrf_token %}
+
+        <!-- Branch -->
+        <div class="lux-field">
+            <label>Branch</label>
+            {{ form.branch }}
+        </div>
+
+        <!-- Party Size -->
+        <div class="lux-field">
+            <label>Party Size</label>
+            {{ form.party_size }}
+        </div>
+
+        <!-- Date -->
+        <div class="lux-field">
+            <label>Date</label>
+            {{ form.date }}
+        </div>
+
+        <!-- Time -->
+        <div class="lux-field">
+            <label>Time</label>
+            {{ form.time }}
+        </div>
+
+        <!-- Notes -->
+        <div class="lux-field">
+            <label>Notes (optional)</label>
+            {{ form.notes }}
+        </div>
+
+        <button type="submit" class="lux-btn">Reserve Now</button>
+    </form>
+</div>
+
+<style>
+/* ----------------------------- */
+/*      GLOBAL DARK THEME        */
+/* ----------------------------- */
+body {
+    background: #0d0d0f;
+    color: #e6e6e6;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Container */
+.lux-container {
+    max-width: 550px;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+/* Title */
+.lux-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #f5d67b;
+}
+
+/* Fields */
+.lux-field {
+    margin-bottom: 22px;
+}
+
+.lux-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #d7c98c;
+}
+
+/* Widgets */
+.lux-field input,
+.lux-field select,
+.lux-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.25s;
+}
+
+/* Hover & Focus States */
+.lux-field input:focus,
+.lux-field select:focus,
+.lux-field textarea:focus {
+    border-color: #f5d67b;
+    box-shadow: 0 0 7px rgba(245, 214, 123, 0.4);
+}
+
+/* Button */
+.lux-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #f5d67b, #d8b35b);
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #000;
+    transition: 0.25s;
+}
+
+.lux-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 214, 123, 0.35);
+}
+
+/* Fix dark dropdown issue */
+select,
+select option {
+    background-color: #222;   /* dropdown background */
+    color: #f8e7b5 !important; /* TEXT COLOR (gold-ish) */
+}
+
+select option:hover {
+    background-color: #444 !important;
+    color: #fff !important;
+}
+
+</style>
+
+{% endblock %}

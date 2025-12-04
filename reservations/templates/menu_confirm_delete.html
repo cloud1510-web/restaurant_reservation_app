@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Delete Menu Item {% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold text-red-400 mb-6">Delete Menu Item</h1>
+
+<p class="mb-6">Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button class="btn-gold bg-red-600 hover:bg-red-700 text-white">Delete</button>
+</form>
+{% endblock %}
